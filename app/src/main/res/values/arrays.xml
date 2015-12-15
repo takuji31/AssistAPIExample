@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="voice_actors">
+        <item>小倉唯</item>
+        <item>雨宮天</item>
+        <item>佐倉綾音</item>
+        <item>水瀬いのり</item>
+        <item>井口裕香</item>
+        <item>早見沙織</item>
+        <item>内田真礼</item>
+        <item>三森すずこ</item>
+        <item>南條愛乃</item>
+        <item>新田恵海</item>
+    </string-array>
+</resources>
