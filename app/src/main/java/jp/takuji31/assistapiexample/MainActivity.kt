@@ -1,5 +1,6 @@
 package jp.takuji31.assistapiexample
 
+import android.app.assist.AssistContent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
@@ -8,9 +9,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import kotlinx.android.synthetic.main.content_main.*
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
+
+    val adapter = Adapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener { view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show() }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -42,5 +50,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onProvideAssistContent(outContent: AssistContent?) {
+        val structuredJson = JSONObject()
+                .put("@type", "MusicRecording")
+                .put("@id", "https://example.com/music/recording")
+                .put("name", "Album Title")
+                .toString();
+
+        outContent?.structuredData = structuredJson;
     }
 }
