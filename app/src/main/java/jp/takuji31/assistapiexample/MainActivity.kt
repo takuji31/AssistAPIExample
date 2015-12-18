@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     val adapter = Adapter(this)
 
+    var secure = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,12 +26,21 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener { view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show() }
+        fab.setOnClickListener { view ->
+            if (secure) {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+            } else {
+                window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
+            }
+            secure = !secure
+            Snackbar.make(view, "Secure changed $secure", Snackbar.LENGTH_SHORT).show()
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
         window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -21,7 +21,7 @@ class Adapter(val context: Context) : RecyclerView.Adapter<Adapter.ViewHolder>()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder? {
-        val view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+        val view = inflater.inflate(R.layout.recycler_row, parent, false)
         return ViewHolder(view = view)
     }
 
@@ -36,7 +36,7 @@ class Adapter(val context: Context) : RecyclerView.Adapter<Adapter.ViewHolder>()
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         val textView by lazy {
-            view.findViewById(android.R.id.text1) as TextView
+            view.findViewById(R.id.textView) as TextView
         }
     }
 }
